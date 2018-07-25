@@ -26,6 +26,7 @@ public with sharing class Uuid {
         // Remove any non-alphanumeric characters. Should be unnecessary, but better to be safe than sorry.
         unformattedValue = unformattedValue.replaceAll('[^a-zA-Z0-9]', '');
 
+        // UUID Pattern: 8-4-4-4-12
         String formattedValue = unformattedValue.substring(0, 8)
             + '-' + unformattedValue.substring(8, 12)
             + '-' + unformattedValue.substring(12, 16)
@@ -56,15 +57,14 @@ public with sharing class Uuid {
         // Variant Format: Always begins with one of 8,9,a,b
         String variantShiftedHexBits = this.getShiftedHexBits(hex.substring(18, 20), this.convertHexToInteger('0x3f'), this.convertHexToInteger('0x80'));
 
-        // UUID Pattern: 8-4-4-4-12
         String uuidValue =
-            hex.substring(0, 8)                                   // time-low
-            + '-' + hex.substring(8, 12)                          // time-mid
-            + '-' + versionShiftedHexBits + hex.substring(14, 16) // time-high-and-version
-            + '-' + variantShiftedHexBits + hex.substring(18, 20) // clock-seq-and-reserved + clock-seq-low
-            + '-' + hex.substring(20);                            //node
+            hex.substring(0, 8)                             // time-low
+            + hex.substring(8, 12)                          // time-mid
+            + versionShiftedHexBits + hex.substring(14, 16) // time-high-and-version
+            + variantShiftedHexBits + hex.substring(18, 20) // clock-seq-and-reserved + clock-seq-low
+            + hex.substring(20);                            //node
 
-        return uuidValue.toLowerCase();
+        return formatValue(uuidValue);
     }
 
     private String getShiftedHexBits(String hexSubstring, Integer lowerThreshold, Integer upperThreshold) {
