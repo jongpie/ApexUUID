@@ -67,4 +67,10 @@ private class Uuid_Tests {
         System.assertEquals(true, Uuid.isValid(exampleUuid));
     }
 
+    @isTest
+    static void it_should_return_value_for_to_string_method() {
+        Uuid uuid = new Uuid();
+        System.assertEquals(uuid.getValue(), uuid.toString());
+    }
+
 }
