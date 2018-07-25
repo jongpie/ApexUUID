@@ -1,5 +1,5 @@
 # Apex UUID
-[![Travis CI](https://img.shields.io/travis/jongpie/ApexUuid/master.svg)](https://travis-ci.org/jongpie/ApexUuid)
+[![Build Status](https://travis-ci.org/jongpie/ApexUuid.svg?branch=master)](https://travis-ci.org/jongpie/ApexUuid)
 
 <a href="https://githubsfdeploy.herokuapp.com" target="_blank">
     <img alt="Deploy to Salesforce" src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
