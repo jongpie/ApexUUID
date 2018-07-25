@@ -16,7 +16,6 @@ public with sharing class Uuid {
     public static Boolean isValid(String uuidValue) {
         if(isEmpty(uuidValue)) return false;
 
-
         Pattern uuidPattern = Pattern.compile(UUID_V4_REGEX.toLowerCase());
         Matcher uuidMatcher = uuidPattern.matcher(uuidValue.toLowerCase());
 
