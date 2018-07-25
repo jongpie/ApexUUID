@@ -21,7 +21,7 @@ private class Uuid_Tests {
 
     @isTest
     static void it_should_consider_all_zeroes_string_to_be_empty() {
-        System.assert(Uuid.isEmpty('00000000-0000-0000-0000-000000000000'));
+        System.assert(Uuid.isBlank('00000000-0000-0000-0000-000000000000'));
     }
 
     @isTest
@@ -41,12 +41,12 @@ private class Uuid_Tests {
     }
 
     @isTest
-    static void it_should_consider_null_string_an_empty_Uuid() {
-        System.assert(Uuid.isEmpty(null));
+    static void it_should_consider_null_string_a_blank_uuid() {
+        System.assert(Uuid.isBlank(null));
     }
 
     @isTest
-    static void it_should_not_consider_an_empty_string_a_uuid() {
+    static void it_should_not_consider_a_blank_string_a_uuid() {
         System.assertEquals(false, Uuid.isValid(''));
     }
 
