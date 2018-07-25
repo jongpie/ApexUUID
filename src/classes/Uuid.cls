@@ -73,8 +73,7 @@ public without sharing class Uuid {
         // Variant Format: Always begins with one of 8,9,a,b
         String variantShiftedHexBits = this.getShiftedHexBits(hex.substring(18, 20), this.convertHexToInteger('0x3f'), this.convertHexToInteger('0x80'));
 
-        String uuidValue =
-            hex.substring(0, 8)                             // time-low
+        String uuidValue = hex.substring(0, 8)              // time-low
             + hex.substring(8, 12)                          // time-mid
             + versionShiftedHexBits + hex.substring(14, 16) // time-high-and-version
             + variantShiftedHexBits + hex.substring(18, 20) // clock-seq-and-reserved + clock-seq-low
