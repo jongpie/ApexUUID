@@ -4,6 +4,7 @@
 ******************************************************************************************/
 public with sharing class Uuid {
 
+    private static final Integer HEX_BASE                = HEX_CHARACTERS.length();
     private static final String HEX_CHARACTERS           = '0123456789ABCDEF';
     private static final List<String> HEX_CHARACTER_LIST = HEX_CHARACTERS.split('');
     private static final String UUID_V4_REGEX            = '[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}';
@@ -80,7 +81,7 @@ public with sharing class Uuid {
         Integer integerValue = 0;
         for(String hexCharacter : hexValue.split('')) {
             Integer characterIndex = HEX_CHARACTERS.indexOf(hexCharacter);
-            integerValue = 16 * integerValue + characterIndex;
+            integerValue = HEX_BASE * integerValue + characterIndex;
         }
         return integerValue;
     }
@@ -88,9 +89,9 @@ public with sharing class Uuid {
     private String convertIntegerToHex(Integer integerValue) {
         String hexValue = '';
         while(integerValue > 0) {
-             Integer hexCharacterIndex = Math.mod(integerValue, 16);
+             Integer hexCharacterIndex = Math.mod(integerValue, HEX_BASE);
              hexValue = HEX_CHARACTER_LIST[hexCharacterIndex] + hexValue;
-             integerValue = integerValue / 16;
+             integerValue = integerValue / HEX_BASE;
         }
         return hexValue;
     }
