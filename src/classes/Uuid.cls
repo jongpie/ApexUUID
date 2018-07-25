@@ -4,6 +4,10 @@
 ******************************************************************************************/
 public with sharing class Uuid {
 
+    private static final String HEX_CHARACTERS           = '0123456789ABCDEF';
+    private static final List<String> HEX_CHARACTER_LIST = HEX_CHARACTERS.split('');
+    private static final String UUID_V4_REGEX            = '[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}';
+
     public static Boolean isEmpty(String uuidValue) {
         return String.isBlank(uuidValue) || formatValue(uuidValue) == '00000000-0000-0000-0000-000000000000';
     }
@@ -11,7 +15,6 @@ public with sharing class Uuid {
     public static Boolean isValid(String uuidValue) {
         if(isEmpty(uuidValue)) return false;
 
-        final String UUID_V4_REGEX = '[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}';
 
         Pattern uuidPattern = Pattern.compile(UUID_V4_REGEX.toLowerCase());
         Matcher uuidMatcher = uuidPattern.matcher(uuidValue.toLowerCase());
@@ -64,30 +67,32 @@ public with sharing class Uuid {
         return uuidValue.toLowerCase();
     }
 
-    public String getShiftedHexBits(String hexSubstring, Integer lowerThreshold, Integer upperThreshold) {
+    private String getShiftedHexBits(String hexSubstring, Integer lowerThreshold, Integer upperThreshold) {
         Integer shiftedIntegerBits = (this.convertHexToInteger(hexSubstring) & lowerThreshold) | upperThreshold;
         return this.convertIntegerToHex(shiftedIntegerBits);
     }
 
-    // Apex version of https://introcs.cs.princeton.edu/java/31datatype/Hex2Decimal.java.html
-    public Integer convertHexToInteger(String hex) {
-        String hexCharacters = '0123456789ABCDEF';
-        hex = hex.toUpperCase();
-        if(hex.startsWith('0X')) hex = hex.substringAfter('0X');
+    private Integer convertHexToInteger(String hexValue) {
+        hexValue = hexValue.toUpperCase();
+
+        if(hexValue.startsWith('0X')) hexValue = hexValue.substringAfter('0X');
+
         Integer integerValue = 0;
-        for(String hexCharacter : hex.split('')) {
-            Integer characterIndex = hexCharacters.indexOf(hexCharacter);
+        for(String hexCharacter : hexValue.split('')) {
+            Integer characterIndex = HEX_CHARACTERS.indexOf(hexCharacter);
             integerValue = 16 * integerValue + characterIndex;
         }
         return integerValue;
     }
 
-    public String convertIntegerToHex(Integer integerValue) {
-        List<String> hexCharacters = '0123456789ABCDEF'.split('');
-        String hs0 = hexCharacters[integerValue & this.convertHexToInteger('0x0f')];
-        String hs1 = hexCharacters[(integerValue >> this.convertHexToInteger('0x04')) & this.convertHexToInteger('0x0f')];
-
-        return hs1 + hs0;
+    private String convertIntegerToHex(Integer integerValue) {
+        String hexValue = '';
+        while(integerValue > 0) {
+             Integer hexCharacterIndex = Math.mod(integerValue, 16);
+             hexValue = HEX_CHARACTER_LIST[hexCharacterIndex] + hexValue;
+             integerValue = integerValue / 16;
+        }
+        return hexValue;
     }
 
 }
