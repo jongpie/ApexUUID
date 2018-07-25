@@ -2,7 +2,7 @@
 * This file is part of the Apex UUID project, released under the MIT License.             *
 * See LICENSE file or go to https://github.com/jongpie/ApexUuid for full license details. *
 ******************************************************************************************/
-public with sharing class Uuid {
+public without sharing class Uuid {
 
     private static final Integer HEX_BASE                = HEX_CHARACTERS.length();
     private static final String HEX_CHARACTERS           = '0123456789ABCDEF';
