@@ -7,19 +7,25 @@ public with sharing class Uuid {
     private static final Integer HEX_BASE                = HEX_CHARACTERS.length();
     private static final String HEX_CHARACTERS           = '0123456789ABCDEF';
     private static final List<String> HEX_CHARACTER_LIST = HEX_CHARACTERS.split('');
+    private static final Integer UUID_V4_LENGTH          = 36;
     private static final String UUID_V4_REGEX            = '[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}';
 
     public static Boolean isEmpty(String uuidValue) {
-        return String.isBlank(uuidValue) || formatValue(uuidValue) == '00000000-0000-0000-0000-000000000000';
+        return String.isBlank(uuidValue) || uuidValue == '00000000-0000-0000-0000-000000000000';
     }
 
     public static Boolean isValid(String uuidValue) {
         if(isEmpty(uuidValue)) return false;
+        if(uuidValue.length() != UUID_V4_LENGTH) return false;
 
         Pattern uuidPattern = Pattern.compile(UUID_V4_REGEX.toLowerCase());
         Matcher uuidMatcher = uuidPattern.matcher(uuidValue.toLowerCase());
 
         return uuidMatcher.matches();
+    }
+
+    public static Uuid valueOf(String uuidValue) {
+        return new Uuid(uuidValue);
     }
 
     private static String formatValue(String unformattedValue) {
@@ -40,6 +46,12 @@ public with sharing class Uuid {
 
     public Uuid() {
         this.value = this.generateValue();
+    }
+
+    private Uuid(String uuidValue) {
+        if(!isValid(uuidValue)) throw new UuidException(uuidValue + ' is not a valid UUID');
+
+        this.value = formatValue(uuidValue);
     }
 
     public String getValue() {
@@ -98,5 +110,7 @@ public with sharing class Uuid {
         }
         return hexValue;
     }
+
+    private class UuidException extends Exception {}
 
 }

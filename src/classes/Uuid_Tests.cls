@@ -73,4 +73,15 @@ private class Uuid_Tests {
         System.assertEquals(uuid.getValue(), uuid.toString());
     }
 
+    @isTest
+    static void it_should_convert_a_valid_string_to_a_uuid() {
+        String uuidValue = new Uuid().getValue();
+
+        Test.startTest();
+        Uuid convertedUuid = Uuid.valueOf(uuidValue);
+        Test.stopTest();
+
+        System.assertEquals(uuidValue, convertedUuid.getValue());
+    }
+
 }
