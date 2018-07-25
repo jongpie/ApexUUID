@@ -86,8 +86,7 @@ public with sharing class Uuid {
         List<String> hexCharacters = '0123456789ABCDEF'.split('');
         String hs0 = hexCharacters[integerValue & this.convertHexToInteger('0x0f')];
         String hs1 = hexCharacters[(integerValue >> this.convertHexToInteger('0x04')) & this.convertHexToInteger('0x0f')];
-system.debug('hs0=' + hs0);
-system.debug('hs1=' + hs1);
+
         return hs1 + hs0;
     }
 
