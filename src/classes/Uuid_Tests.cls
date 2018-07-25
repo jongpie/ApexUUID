@@ -1,47 +1,70 @@
+/******************************************************************************************
+* This file is part of the Apex UUID project, released under the MIT License.             *
+* See LICENSE file or go to https://github.com/jongpie/ApexUuid for full license details. *
+******************************************************************************************/
 @isTest
-private class Guid_Tests {
+private class Uuid_Tests {
+
+    @isTest
+    static void it_should_create_several_valid_uuids() {
+        String generatedUuid = new Uuid().getValue();
+        System.assertEquals(36, generatedUuid.length());
+
+        Pattern pattern = Pattern.compile('[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}');
+
+        for(Integer i = 0; i < 10; i++) {
+            Uuid uuid = new Uuid();
+            Matcher matcher = pattern.matcher(uuid.getValue());
+            System.assert(matcher.matches(), 'Generated UUID=' + uuid.getValue());
+        }
+    }
 
     @isTest
     static void it_should_consider_all_zeroes_string_to_be_empty() {
-        System.assert(Guid.isEmpty('00000000-0000-0000-0000-000000000000'));
+        System.assert(Uuid.isEmpty('00000000-0000-0000-0000-000000000000'));
     }
 
     @isTest
-    static void it_should_create_a_new_guid() {
-        String generatedGuid = Guid.createGuid();
-        System.assertEquals(36, generatedGuid.length());
+    static void it_should_reuse_a_uuid_on_subsequent_calls() {
+        Uuid uuid = new Uuid();
+        String originalValue = uuid.getValue();
+
+        for(Integer i = 0; i < 5; i++) {
+            System.assertEquals(originalValue, uuid.getValue());
+        }
     }
 
     @isTest
-    static void it_should_verify_that_a_guid_is_a_guid() {
-        String generatedGuid = Guid.createGuid();
-        System.assert(Guid.isGuid(generatedGuid));
+    static void it_should_verify_that_a_uuid_is_a_uuid() {
+        String generatedUuid = new Uuid().getValue();
+        System.assert(Uuid.isValid(generatedUuid));
     }
 
     @isTest
-    static void it_should_consider_null_string_an_empty_guid() {
-        System.assert(Guid.isEmpty(null));
+    static void it_should_consider_null_string_an_empty_Uuid() {
+        System.assert(Uuid.isEmpty(null));
     }
 
     @isTest
-    static void it_should_not_consider_an_empty_string_a_guid() {
-        System.assertEquals(false, Guid.isGuid(''));
+    static void it_should_not_consider_an_empty_string_a_uuid() {
+        System.assertEquals(false, Uuid.isValid(''));
     }
 
     @isTest
-    static void it_should_not_consider_null_a_guid() {
-        System.assertEquals(false, Guid.isGuid(null));
+    static void it_should_not_consider_null_a_uuid() {
+        System.assertEquals(false, Uuid.isValid(null));
     }
 
     @isTest
-    static void it_should_validate_a_guid_in_upper_case() {
-        String exampleGuid = 'f3665813-1a60-4924-ad9b-23a9cef17d80'.toUpperCase();
-        System.assertEquals(true, Guid.isGuid(exampleGuid));
+    static void it_should_validate_a_uuid_in_upper_case() {
+        String exampleUuid = 'f3665813-1a60-4924-ad9b-23a9cef17d80'.toUpperCase();
+        System.assertEquals(true, Uuid.isValid(exampleUuid));
     }
 
     @isTest
-    static void it_should_validate_a_guid_in_lower_case() {
-        String exampleGuid = 'f3665813-1a60-4924-ad9b-23a9cef17d80'.toLowerCase();
-        System.assertEquals(true, Guid.isGuid(exampleGuid));
+    static void it_should_validate_a_uuid_in_lower_case() {
+        String exampleUuid = 'f3665813-1a60-4924-ad9b-23a9cef17d80'.toLowerCase();
+        System.assertEquals(true, Uuid.isValid(exampleUuid));
     }
+
 }
