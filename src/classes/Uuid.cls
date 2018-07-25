@@ -58,10 +58,6 @@ public without sharing class Uuid {
         return this.value;
     }
 
-    public override String toString() {
-        return this.value;
-    }
-
     private String generateValue() {
         String hex = EncodingUtil.convertToHex(Crypto.generateAesKey(128));
 
