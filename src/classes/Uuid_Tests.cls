@@ -84,4 +84,19 @@ private class Uuid_Tests {
         System.assertEquals(uuidValue, convertedUuid.getValue());
     }
 
+    @isTest
+    static void it_should_not_convert_an_invalid_string_to_a_uuid() {
+        String invalidUuidValue = 'this-is-not-a-valid-uuid';
+
+        Test.startTest();
+        try {
+            Uuid convertedUuid = Uuid.valueOf(invalidUuidValue);
+            System.assert(false, 'Error expected here');
+        } catch(Exception ex) {
+            String expectedError = invalidUuidValue + ' is not a valid UUID';
+            System.assert(ex.getMessage().contains(expectedError));
+        }
+        Test.stopTest();
+    }
+
 }
