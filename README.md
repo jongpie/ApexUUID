@@ -65,7 +65,7 @@ If you already have a UUID as a string (previously generated in Apex, generated 
     ```
 3. **I have a UUID value, how can I use it to construct a UUID?**
 
-    This will automatically format the value for you, but the intial value must be a valid UUID string
+    This will automatically format the value for you, but the intial value must be a valid (unformatted) UUID string
     ```
     Uuid myUuid = Uuid.valueOf(myUuidValue);
     ```
