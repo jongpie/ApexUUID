@@ -5,18 +5,19 @@
 public without sharing class Uuid {
 
     private static final Integer HEX_BASE                = HEX_CHARACTERS.length();
-    private static final String HEX_CHARACTERS           = '0123456789ABCDEF';
+    private static final String HEX_CHARACTERS           = '0123456789abcdef';
     private static final List<String> HEX_CHARACTER_LIST = HEX_CHARACTERS.split('');
     private static final Integer UUID_V4_LENGTH          = 36;
-    private static final String UUID_V4_REGEX            = '[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}';
+    private static final String UUID_V4_REGEX            = '[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}';
 
     public static String formatValue(String unformattedValue) {
         String invalidValueError = unformattedValue + ' is not a valid UUID value';
 
-        // Remove any non-alphanumeric characters. Should be unnecessary, but better to be safe than sorry.
+        // Remove any non-alphanumeric characters
         unformattedValue = unformattedValue.replaceAll('[^a-zA-Z0-9]', '');
 
-        // If the unformatted value isn't valid, then we can't format it, so return the original
+        // If the unformatted value isn't even the right length to be valid, then throw an exception
+        // Subtract 4 because the UUID_V4_LENGTH includes 4 '-' characters in the UUID pattern
         if(unformattedValue.length() != (UUID_V4_LENGTH - 4)) throw new UuidException(invalidValueError);
 
         // UUID Pattern: 8-4-4-4-12
@@ -54,8 +55,6 @@ public without sharing class Uuid {
     }
 
     private Uuid(String uuidValue) {
-        if(!isValid(uuidValue)) throw new UuidException(uuidValue + ' is not a valid UUID');
-
         this.value = formatValue(uuidValue);
     }
 
@@ -64,21 +63,21 @@ public without sharing class Uuid {
     }
 
     private String generateValue() {
-        String hex = EncodingUtil.convertToHex(Crypto.generateAesKey(128));
+        String hexValue = EncodingUtil.convertToHex(Crypto.generateAesKey(128));
 
         // Version Calculation: (i & 0x0f) | 0x40
         // Version Format: Always begins with 4
-        String versionShiftedHexBits = this.getShiftedHexBits(hex.substring(14, 16), this.convertHexToInteger('0x0f'), this.convertHexToInteger('0x40'));
+        String versionShiftedHexBits = this.getShiftedHexBits(hexValue.substring(14, 16), this.convertHexToInteger('0x0f'), this.convertHexToInteger('0x40'));
 
         // Variant Calculation: (i & 0x3f) | 0x80
         // Variant Format: Always begins with 8, 9, A or B
-        String variantShiftedHexBits = this.getShiftedHexBits(hex.substring(18, 20), this.convertHexToInteger('0x3f'), this.convertHexToInteger('0x80'));
+        String variantShiftedHexBits = this.getShiftedHexBits(hexValue.substring(18, 20), this.convertHexToInteger('0x3f'), this.convertHexToInteger('0x80'));
 
-        String uuidValue = hex.substring(0, 8)              // time-low
-            + hex.substring(8, 12)                          // time-mid
-            + versionShiftedHexBits + hex.substring(14, 16) // time-high-and-version
-            + variantShiftedHexBits + hex.substring(18, 20) // clock-seq-and-reserved + clock-seq-low
-            + hex.substring(20);                            // node
+        String uuidValue = hexValue.substring(0, 8)              // time-low
+            + hexValue.substring(8, 12)                          // time-mid
+            + versionShiftedHexBits + hexValue.substring(14, 16) // time-high-and-version
+            + variantShiftedHexBits + hexValue.substring(18, 20) // clock-seq-and-reserved + clock-seq-low
+            + hexValue.substring(20);                            // node
 
         return formatValue(uuidValue);
     }
@@ -89,14 +88,15 @@ public without sharing class Uuid {
     }
 
     private Integer convertHexToInteger(String hexValue) {
-        hexValue = hexValue.toUpperCase();
+        hexValue = hexValue.toLowerCase();
 
-        if(hexValue.startsWith('0X')) hexValue = hexValue.substringAfter('0X');
+        if(hexValue.startsWith('0x')) hexValue = hexValue.substringAfter('0x');
 
         Integer integerValue = 0;
         for(String hexCharacter : hexValue.split('')) {
-            Integer characterIndex = HEX_CHARACTERS.indexOf(hexCharacter);
-            integerValue = HEX_BASE * integerValue + characterIndex;
+            Integer hexCharacterIndex = HEX_CHARACTERS.indexOf(hexCharacter);
+
+            integerValue = HEX_BASE * integerValue + hexCharacterIndex;
         }
         return integerValue;
     }
@@ -105,7 +105,8 @@ public without sharing class Uuid {
         String hexValue = '';
         while(integerValue > 0) {
              Integer hexCharacterIndex = Math.mod(integerValue, HEX_BASE);
-             hexValue = HEX_CHARACTER_LIST[hexCharacterIndex] + hexValue;
+
+             hexValue     = HEX_CHARACTER_LIST[hexCharacterIndex] + hexValue;
              integerValue = integerValue / HEX_BASE;
         }
         return hexValue;
