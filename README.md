@@ -46,7 +46,7 @@ recordsToCreate.sort();
 insert recordsToCreate;
 
 // Verify that we only used 1 DML statement
-System.assertEquals(1, Limits.getDMLStatements());
+System.assertEquals(1, Limits.getDmlStatements());
 ```
 
 ### Using a UUID's string value
