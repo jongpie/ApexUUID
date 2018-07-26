@@ -59,7 +59,7 @@ If you already have a UUID as a string (previously generated in Apex, generated 
     ```
 2. **I have a UUID value but need to format it**
 
-    This returns a formatted string that follows the UUID pattern: 8-4-4-4-12 in lowercase
+    This returns a formatted string that follows the UUID pattern: 8-4-4-4-12 in lowercase. If an invalid string is provided, a UuidException is thrown.
     ```
     String formattedUuidValue = Uuid.formatValue(myUnformattedUuidValue);
     ```
