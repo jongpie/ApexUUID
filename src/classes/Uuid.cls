@@ -30,7 +30,7 @@ public without sharing class Uuid {
 
         formattedValue = formattedValue.toLowerCase();
 
-        if(!isValid(formattedValue)) throw new UuidException(invalidValueError);
+        if(!Uuid.isValid(formattedValue)) throw new UuidException(invalidValueError);
 
         return formattedValue;
     }
@@ -56,7 +56,7 @@ public without sharing class Uuid {
     }
 
     private Uuid(String uuidValue) {
-        this.value = formatValue(uuidValue);
+        this.value = Uuid.formatValue(uuidValue);
     }
 
     public String getValue() {
@@ -80,7 +80,7 @@ public without sharing class Uuid {
             + variantShiftedHexBits + hexValue.substring(18, 20) // clock-seq-and-reserved + clock-seq-low
             + hexValue.substring(20);                            // node
 
-        return formatValue(uuidValue);
+        return Uuid.formatValue(uuidValue);
     }
 
     private String getShiftedHexBits(String hexSubstring, Integer lowerThreshold, Integer upperThreshold) {
