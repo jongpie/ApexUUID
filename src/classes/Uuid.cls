@@ -10,16 +10,6 @@ public without sharing class Uuid {
     private static final Integer UUID_V4_LENGTH          = 36;
     private static final String UUID_V4_REGEX            = '[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}';
 
-    public static Boolean isValid(String uuidValue) {
-        if(String.isBlank(uuidValue)) return false;
-        if(uuidValue.length() != UUID_V4_LENGTH) return false;
-
-        Pattern uuidPattern = Pattern.compile(UUID_V4_REGEX.toLowerCase());
-        Matcher uuidMatcher = uuidPattern.matcher(uuidValue.toLowerCase());
-
-        return uuidMatcher.matches();
-    }
-
     public static String formatValue(String unformattedValue) {
         String invalidValueError = unformattedValue + ' is not a valid UUID value';
 
@@ -41,6 +31,16 @@ public without sharing class Uuid {
         if(!isValid(formattedValue)) throw new UuidException(invalidValueError);
 
         return formattedValue;
+    }
+
+    public static Boolean isValid(String uuidValue) {
+        if(String.isBlank(uuidValue)) return false;
+        if(uuidValue.length() != UUID_V4_LENGTH) return false;
+
+        Pattern uuidPattern = Pattern.compile(UUID_V4_REGEX.toLowerCase());
+        Matcher uuidMatcher = uuidPattern.matcher(uuidValue.toLowerCase());
+
+        return uuidMatcher.matches();
     }
 
     public static Uuid valueOf(String uuidValue) {
