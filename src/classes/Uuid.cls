@@ -6,12 +6,13 @@ public without sharing class Uuid {
 
     private static final Integer HEX_BASE                = HEX_CHARACTERS.length();
     private static final String HEX_CHARACTERS           = '0123456789abcdef';
+    private static final String HEX_PREFIX               = '0x';
     private static final List<String> HEX_CHARACTER_LIST = HEX_CHARACTERS.split('');
     private static final Integer UUID_V4_LENGTH          = 36;
     private static final String UUID_V4_REGEX            = '[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}';
 
     public static String formatValue(String unformattedValue) {
-        String invalidValueError = unformattedValue + ' is not a valid UUID value';
+        final String invalidValueError = unformattedValue + ' is not a valid UUID value';
 
         // Remove any non-alphanumeric characters
         unformattedValue = unformattedValue.replaceAll('[^a-zA-Z0-9]', '');
@@ -90,7 +91,7 @@ public without sharing class Uuid {
     private Integer convertHexToInteger(String hexValue) {
         hexValue = hexValue.toLowerCase();
 
-        if(hexValue.startsWith('0x')) hexValue = hexValue.substringAfter('0x');
+        if(hexValue.startsWith(HEX_PREFIX)) hexValue = hexValue.substringAfter(HEX_PREFIX);
 
         Integer integerValue = 0;
         for(String hexCharacter : hexValue.split('')) {
