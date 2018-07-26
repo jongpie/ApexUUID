@@ -24,11 +24,7 @@ public without sharing class Uuid {
         return uuidMatcher.matches();
     }
 
-    public static Uuid valueOf(String uuidValue) {
-        return new Uuid(uuidValue);
-    }
-
-    private static String formatValue(String unformattedValue) {
+    public static String formatValue(String unformattedValue) {
         // Remove any non-alphanumeric characters. Should be unnecessary, but better to be safe than sorry.
         unformattedValue = unformattedValue.replaceAll('[^a-zA-Z0-9]', '');
 
@@ -40,6 +36,10 @@ public without sharing class Uuid {
             + '-' + unformattedValue.substring(20);
 
         return formattedValue.toLowerCase();
+    }
+
+    public static Uuid valueOf(String uuidValue) {
+        return new Uuid(uuidValue);
     }
 
     private final String value;
