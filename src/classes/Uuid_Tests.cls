@@ -20,11 +20,6 @@ private class Uuid_Tests {
     }
 
     @isTest
-    static void it_should_consider_all_zeroes_string_to_be_empty() {
-        System.assert(Uuid.isBlank('00000000-0000-0000-0000-000000000000'));
-    }
-
-    @isTest
     static void it_should_reuse_a_uuid_on_subsequent_calls() {
         Uuid uuid = new Uuid();
         String originalValue = uuid.getValue();
@@ -38,11 +33,6 @@ private class Uuid_Tests {
     static void it_should_verify_that_a_uuid_is_a_uuid() {
         String generatedUuid = new Uuid().getValue();
         System.assert(Uuid.isValid(generatedUuid));
-    }
-
-    @isTest
-    static void it_should_consider_null_string_a_blank_uuid() {
-        System.assert(Uuid.isBlank(null));
     }
 
     @isTest
