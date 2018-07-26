@@ -21,8 +21,13 @@ public without sharing class Uuid {
     }
 
     public static String formatValue(String unformattedValue) {
+        String invalidValueError = unformattedValue + ' is not a valid UUID value';
+
         // Remove any non-alphanumeric characters. Should be unnecessary, but better to be safe than sorry.
         unformattedValue = unformattedValue.replaceAll('[^a-zA-Z0-9]', '');
+
+        // If the unformatted value isn't valid, then we can't format it, so return the original
+        if(unformattedValue.length() != (UUID_V4_LENGTH - 4)) throw new UuidException(invalidValueError);
 
         // UUID Pattern: 8-4-4-4-12
         String formattedValue = unformattedValue.substring(0, 8)
@@ -31,7 +36,11 @@ public without sharing class Uuid {
             + '-' + unformattedValue.substring(16, 20)
             + '-' + unformattedValue.substring(20);
 
-        return formattedValue.toLowerCase();
+        formattedValue = formattedValue.toLowerCase();
+
+        if(!isValid(formattedValue)) throw new UuidException(invalidValueError);
+
+        return formattedValue;
     }
 
     public static Uuid valueOf(String uuidValue) {
