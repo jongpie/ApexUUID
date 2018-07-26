@@ -71,14 +71,14 @@ public without sharing class Uuid {
         String versionShiftedHexBits = this.getShiftedHexBits(hex.substring(14, 16), this.convertHexToInteger('0x0f'), this.convertHexToInteger('0x40'));
 
         // Variant Calculation: (i & 0x3f) | 0x80
-        // Variant Format: Always begins with one of 8,9,a,b
+        // Variant Format: Always begins with 8, 9, A or B
         String variantShiftedHexBits = this.getShiftedHexBits(hex.substring(18, 20), this.convertHexToInteger('0x3f'), this.convertHexToInteger('0x80'));
 
         String uuidValue = hex.substring(0, 8)              // time-low
             + hex.substring(8, 12)                          // time-mid
             + versionShiftedHexBits + hex.substring(14, 16) // time-high-and-version
             + variantShiftedHexBits + hex.substring(18, 20) // clock-seq-and-reserved + clock-seq-low
-            + hex.substring(20);                            //node
+            + hex.substring(20);                            // node
 
         return formatValue(uuidValue);
     }
