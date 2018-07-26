@@ -29,6 +29,7 @@ for(Integer accountCount = 0; accountCount < 10; accountCount++) {
         Uuid__c = new Uuid().getValue()
     );
     recordsToCreate.add(newAccount);
+
     // For each sample account, create 10 sample contacts
     for(Integer contactCount = 0; contactCount < 10; contactCount++) {
         // Instead of setting contact.AccountId with a Salesforce ID...
