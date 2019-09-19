@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ApexUuid</fullName>
+    <description>A small library to provide UUID generation and validation in Apex</description>
     <types>
-        <members>*</members>
+        <members>Uuid</members>
+        <members>Uuid_Tests</members>
         <name>ApexClass</name>
     </types>
-    <version>43.0</version>
+    <version>46.0</version>
 </Package>
