@@ -1,0 +1,22 @@
+{
+  "packageDirectories": [
+    {
+      "package": "Apex UUID",
+      "path": "apex-uuid",
+      "definitionFile": "./config/project-scratch-def.json",
+      "versionNumber": "2.1.0.0",
+      "versionName": "Unlocked Package Release",
+      "versionDescription": "Initial release of new unlocked package (no namespace)",
+      "releaseNotesUrl": "https://github.com/jongpie/ApexUuid/releases",
+      "default": true
+    }
+  ],
+  "name": "ApexUUID",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "55.0",
+  "packageAliases": {
+    "Apex UUID": "0Ho4x0000008OYtCAM",
+    "Apex UUID@2.1.0-0": "04t4x000000NYNEAA4"
+  }
+}
