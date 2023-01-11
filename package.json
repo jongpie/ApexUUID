@@ -1,11 +1,11 @@
 {
-  "name": "salesforce-app",
+  "name": "apex-uuid",
   "private": true,
   "version": "1.0.0",
-  "description": "Salesforce App",
+  "description": "Apex UUID",
   "scripts": {
     "lint": "eslint **/{aura,lwc}/**",
-    "package:version:create:nonamespace": "sfdx force:package:version:create --json --package \"Nebula Cache Manager (no namespace)\" --skipancestorcheck --codecoverage --installationkeybypass --wait 30",
+    "package:version:create": "echo hello && sfdx force:package:version:create --json --package \"Apex UUID\" --skipancestorcheck --codecoverage --installationkeybypass --wait 30 && prettier sfdx-project.json",
     "test:apex": "sfdx force:apex:test:run --verbose --testlevel RunLocalTests --wait 30 --resultformat human --codecoverage --detailedcoverage --outputdir ./test-coverage/apex",
     "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",

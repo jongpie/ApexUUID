@@ -16,6 +16,7 @@
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "55.0",
   "packageAliases": {
-    "Apex UUID": "0Ho4x0000008OYtCAM"
+    "Apex UUID": "0Ho4x0000008OYtCAM",
+    "Apex UUID@2.1.0-0": "04t4x000000NYNEAA4"
   }
 }
