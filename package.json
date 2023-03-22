@@ -2,7 +2,7 @@
   "name": "salesforce-uuid",
   "private": true,
   "version": "2.2.0",
-  "description": "Salesforce UUID",
+  "description": "Salesforce UUID for Apex and Flow",
   "scripts": {
     "lint": "eslint **/{aura,lwc}/**",
     "package:version:create": "echo hello && sfdx force:package:version:create --json --package \"Apex UUID\" --skipancestorcheck --codecoverage --installationkeybypass --wait 30 && prettier sfdx-project.json",
