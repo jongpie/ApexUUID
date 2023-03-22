@@ -1,5 +1,5 @@
 {
-  "name": "salesforce-uuid",
+  "name": "nebula-uuid",
   "private": true,
   "version": "2.2.0",
   "description": "Salesforce UUID for Apex and Flow",

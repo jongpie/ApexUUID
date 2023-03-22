@@ -1,4 +1,4 @@
-# Salesforce UUID
+# Nebula UUID
 
 Provides a way to generate a [UUID (Universally Unique Identifier)](https://en.wikipedia.org/wiki/Universally_unique_identifier) in Salesforce Apex and Flow. This uses Verion 4 of the UUID standard - more details available [here](<https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)>)
 

@@ -5,17 +5,17 @@
   "sourceApiVersion": "57.0",
   "packageDirectories": [
     {
-      "package": "Apex UUID",
-      "path": "salesforce-uuid/main/",
+      "package": "Nebula UUID",
+      "path": "nebula-uuid/main/",
       "definitionFile": "./config/project-scratch-def.json",
       "versionNumber": "2.2.0.0",
       "versionName": "Support for Additional UUID Versions",
       "versionDescription": "TODO",
-      "releaseNotesUrl": "https://github.com/jongpie/ApexUUID/releases",
+      "releaseNotesUrl": "https://github.com/jongpie/NebulaUUID/releases",
       "default": true
     },
     {
-      "path": "salesforce-uuid/extra-tests/",
+      "path": "nebula-uuid/extra-tests/",
       "default": false
     }
   ],
@@ -25,7 +25,7 @@
     }
   },
   "packageAliases": {
-    "Apex UUID": "0Ho4x0000008OYtCAM",
-    "Apex UUID@2.1.0-0": "04t4x000000NYNEAA4"
+    "Nebula UUID": "0Ho4x0000008OYtCAM",
+    "Nebula UUID@2.1.0-0": "04t4x000000NYNEAA4"
   }
 }
