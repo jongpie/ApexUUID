@@ -1,8 +1,8 @@
 {
-  "name": "apex-uuid",
+  "name": "salesforce-uuid",
   "private": true,
-  "version": "1.0.0",
-  "description": "Apex UUID",
+  "version": "2.2.0",
+  "description": "Salesforce UUID",
   "scripts": {
     "lint": "eslint **/{aura,lwc}/**",
     "package:version:create": "echo hello && sfdx force:package:version:create --json --package \"Apex UUID\" --skipancestorcheck --codecoverage --installationkeybypass --wait 30 && prettier sfdx-project.json",
@@ -10,7 +10,8 @@
     "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "postinstall": "husky install",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "scan": "sfdx scanner run --target ./salesforce-uuid/ --engine pmd --severity-threshold 3"
   },
   "devDependencies": {
     "@prettier/plugin-xml": "^2.0.1",
@@ -18,10 +19,12 @@
     "@salesforce/eslint-plugin-aura": "^2.0.0",
     "@salesforce/eslint-plugin-lightning": "^1.0.0",
     "@salesforce/sfdx-lwc-jest": "^1.1.0",
+    "@salesforce/sfdx-scanner": "^3.10.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
     "prettier": "^2.6.0",
-    "prettier-plugin-apex": "^1.10.0"
+    "prettier-plugin-apex": "^1.10.0",
+    "sfdx-cli": "^7.191.1"
   },
   "lint-staged": {
     "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [

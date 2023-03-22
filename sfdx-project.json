@@ -1,20 +1,29 @@
 {
+  "name": "Salesforce UUID",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "57.0",
   "packageDirectories": [
     {
       "package": "Apex UUID",
-      "path": "apex-uuid",
+      "path": "salesforce-uuid/main/",
       "definitionFile": "./config/project-scratch-def.json",
-      "versionNumber": "2.1.0.0",
-      "versionName": "Unlocked Package Release",
-      "versionDescription": "Initial release of new unlocked package (no namespace)",
-      "releaseNotesUrl": "https://github.com/jongpie/ApexUuid/releases",
+      "versionNumber": "2.2.0.0",
+      "versionName": "Support for Additional UUID Versions",
+      "versionDescription": "TODO",
+      "releaseNotesUrl": "https://github.com/jongpie/ApexUUID/releases",
       "default": true
+    },
+    {
+      "path": "salesforce-uuid/extra-tests/",
+      "default": false
     }
   ],
-  "name": "ApexUUID",
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "55.0",
+  "plugins": {
+    "sfdx-plugin-prettier": {
+      "enabled": true
+    }
+  },
   "packageAliases": {
     "Apex UUID": "0Ho4x0000008OYtCAM",
     "Apex UUID@2.1.0-0": "04t4x000000NYNEAA4"
