@@ -9,23 +9,14 @@ public without sharing class FlowUUIDGenerator {
     public String version;
   }
 
-  public class FlowOutput {
-    @InvocableVariable(label='UUID Value')
-    public String value;
-    @InvocableVariable(label='UUID Version')
-    public String version;
-  }
-
   @InvocableMethod(category='UUID' label='Generate UUID' description='Creates a UUID value')
-  public static List<FlowOutput> generate(List<FlowInput> inputs) {
-    List<FLowOutput> outputs = new List<FLowOutput>();
+  public static List<FlowUUID> generate(List<FlowInput> inputs) {
+    List<FlowUUID> outputs = new List<FlowUUID>();
     for (FlowInput input : inputs) {
       UUID.Version uuidVersion = String.isBlank(input.version) == true ? UUID.getDefaultVersion() : UUID.Version.valueOf(input.version);
       UUID uuidInstance = new UUID(uuidVersion);
 
-      FlowOutput output = new FlowOutput();
-      output.value = uuidInstance.getValue();
-      output.version = uuidInstance.getVersion().name();
+      FlowUUID output = new FlowUUID(uuidInstance);
       outputs.add(output);
     }
     return outputs;

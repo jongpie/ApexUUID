@@ -142,7 +142,7 @@ private class UUID_Tests {
     UUID generatedUuid = new UUID();
     String expectedStringValue = generatedUuid.getValue();
 
-    String coercedStringResult = 'Some string' + generatedUuid;
+    String coercedStringResult = '' + generatedUuid;
     String stringValueOfResult = String.valueOf(generatedUuid);
     String toStringResult = generatedUuid.toString();
 

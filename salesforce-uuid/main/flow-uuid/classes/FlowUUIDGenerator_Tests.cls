@@ -1,3 +1,8 @@
+/*************************************************************************************************
+ * This file is part of the Salesforce UUID project, released under the MIT License.             *
+ * See LICENSE file or go to https://github.com/jongpie/SalesforceUUID for full license details. *
+ ************************************************************************************************/
+
 @IsTest
 private class FlowUUIDGenerator_Tests {
   @IsTest
@@ -9,10 +14,10 @@ private class FlowUUIDGenerator_Tests {
       inputs.add(input);
     }
 
-    List<FlowUUIDGenerator.FlowOutput> generatedOutputs = FlowUUIDGenerator.generate(inputs);
+    List<FlowUUID> generatedOutputs = FlowUUIDGenerator.generate(inputs);
 
     System.Assert.areEqual(numberOfValuesToGenerate, generatedOutputs.size());
-    for (FlowUUIDGenerator.FlowOutput generatedOutput : generatedOutputs) {
+    for (FlowUUID generatedOutput : generatedOutputs) {
       System.Assert.areEqual(UUID.getDefaultVersion().name(), generatedOutput.version);
     }
   }
@@ -27,12 +32,12 @@ private class FlowUUIDGenerator_Tests {
       inputs.add(input);
     }
 
-    List<FlowUUIDGenerator.FlowOutput> generatedOutputs = FlowUUIDGenerator.generate(inputs);
+    List<FlowUUID> generatedOutputs = FlowUUIDGenerator.generate(inputs);
 
     System.Assert.areEqual(targetVersions.size(), generatedOutputs.size());
     for (Integer i = 0; i < targetVersions.size(); i++) {
       UUID.Version targetVersion = targetVersions.get(i);
-      FlowUUIDGenerator.FlowOutput generatedOutput = generatedOutputs.get(i);
+      FlowUUID generatedOutput = generatedOutputs.get(i);
       System.Assert.areEqual(targetVersion.name(), generatedOutput.version);
     }
   }

@@ -9,28 +9,11 @@ public without sharing class FlowUUIDValidator {
     public String value;
   }
 
-  public class FlowOutput {
-    @InvocableVariable(label='UUID Value Is Valid')
-    public Boolean isValid;
-    @InvocableVariable(label='UUID Value')
-    public String value;
-    @InvocableVariable(label='UUID Version')
-    public String version;
-  }
-
   @InvocableMethod(category='UUID' label='Validate UUID' description='Validates that the provided String is a valid UUID value')
-  public static List<FlowOutput> validate(List<FlowInput> inputs) {
-    List<FlowOutput> outputs = new List<FlowOutput>();
+  public static List<FlowUUID> validate(List<FlowInput> inputs) {
+    List<FlowUUID> outputs = new List<FlowUUID>();
     for (FlowInput input : inputs) {
-      FlowOutput output = new FlowOutput();
-      output.isValid = UUID.isValid(input.value);
-
-      if (output.isValid == true) {
-        UUID uuidInstance = UUID.valueOf(input.value);
-        output.value = uuidInstance.getValue();
-        output.version = uuidInstance.getVersion().name();
-      }
-
+      FlowUUID output = new FlowUUID(input.value);
       outputs.add(output);
     }
 

@@ -1,3 +1,8 @@
+/*************************************************************************************************
+ * This file is part of the Salesforce UUID project, released under the MIT License.             *
+ * See LICENSE file or go to https://github.com/jongpie/SalesforceUUID for full license details. *
+ ************************************************************************************************/
+
 @IsTest
 private class FlowUUIDValidator_Tests {
   @IsTest
@@ -10,10 +15,10 @@ private class FlowUUIDValidator_Tests {
       inputs.add(input);
     }
 
-    List<FlowUUIDValidator.FlowOutput> generatedOutputs = FlowUUIDValidator.validate(inputs);
+    List<FlowUUID> generatedOutputs = FlowUUIDValidator.validate(inputs);
 
     System.Assert.areEqual(numberOfValuesToGenerate, generatedOutputs.size());
-    for (FlowUUIDValidator.FlowOutput generatedOutput : generatedOutputs) {
+    for (FlowUUID generatedOutput : generatedOutputs) {
       System.Assert.isTrue(generatedOutput.isValid);
       System.Assert.isNotNull(generatedOutput.value);
       System.Assert.areEqual(UUID.getDefaultVersion().name(), generatedOutput.version);
@@ -30,10 +35,10 @@ private class FlowUUIDValidator_Tests {
       inputs.add(input);
     }
 
-    List<FlowUUIDValidator.FlowOutput> generatedOutputs = FlowUUIDValidator.validate(inputs);
+    List<FlowUUID> generatedOutputs = FlowUUIDValidator.validate(inputs);
 
     System.Assert.areEqual(numberOfValuesToGenerate, generatedOutputs.size());
-    for (FlowUUIDValidator.FlowOutput generatedOutput : generatedOutputs) {
+    for (FlowUUID generatedOutput : generatedOutputs) {
       System.Assert.isFalse(generatedOutput.isValid);
       System.Assert.isNull(generatedOutput.value);
       System.Assert.isNull(generatedOutput.version);
