@@ -5,12 +5,12 @@
 
 public without sharing class FlowUUIDValidator {
   public class FlowInput {
-    @InvocableVariable(required=true label='UUID Value')
+    @InvocableVariable(required=true label='Unvalidated UUID Value')
     public String value;
   }
 
   public class FlowOutput {
-    @InvocableVariable(label='UUID Is Valid')
+    @InvocableVariable(label='UUID Value Is Valid')
     public Boolean isValid;
     @InvocableVariable(label='UUID Value')
     public String value;

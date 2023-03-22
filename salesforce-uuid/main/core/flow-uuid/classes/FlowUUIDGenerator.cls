@@ -20,11 +20,9 @@ public without sharing class FlowUUIDGenerator {
   public static List<FlowOutput> generate(List<FlowInput> inputs) {
     List<FLowOutput> outputs = new List<FLowOutput>();
     for (FlowInput input : inputs) {
-      UUID.Version uuidVersion = UUID.getDefaultVersion();
-      if (String.isNotBlank(input.version) == true) {
-        uuidVersion = UUID.Version.valueOf(input.version);
-      }
+      UUID.Version uuidVersion = String.isBlank(input.version) == true ? UUID.getDefaultVersion() : UUID.Version.valueOf(input.version);
       UUID uuidInstance = new UUID(uuidVersion);
+
       FlowOutput output = new FlowOutput();
       output.value = uuidInstance.getValue();
       output.version = uuidInstance.getVersion().name();

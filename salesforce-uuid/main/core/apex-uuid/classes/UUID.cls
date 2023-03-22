@@ -42,7 +42,7 @@ public without sharing class UUID {
 
   public UUID(Version uuidVersion) {
     this.uuidVersion = uuidVersion;
-    this.setValue(this.getGenerator(uuidVersion).generateValue());
+    this.setValue(UUID.getGenerator(uuidVersion).generateValue());
   }
 
   private UUID(String uuidValue) {
@@ -51,10 +51,6 @@ public without sharing class UUID {
 
   public String getValue() {
     return this.value;
-  }
-
-  public override String toString() {
-    return this.getValue();
   }
 
   public Version getVersion() {
@@ -69,8 +65,8 @@ public without sharing class UUID {
     return this.uuidVersion;
   }
 
-  private UUIDGenerator getGenerator(Version uuidVersion) {
-    return (UUIDGenerator) VERSION_TO_GENERATOR_TYPE.get(uuidVersion).newInstance();
+  public override String toString() {
+    return this.getValue();
   }
 
   private void setValue(String uuidValue) {
@@ -222,6 +218,10 @@ public without sharing class UUID {
 
   public static UUID valueOf(String uuidValue) {
     return new UUID(uuidValue);
+  }
+
+  private static UUIDGenerator getGenerator(Version uuidVersion) {
+    return (UUIDGenerator) VERSION_TO_GENERATOR_TYPE.get(uuidVersion).newInstance();
   }
 
   private static void throwInvalidValueException(String uuidValue) {
