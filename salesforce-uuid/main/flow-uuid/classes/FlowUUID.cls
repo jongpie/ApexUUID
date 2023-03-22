@@ -4,14 +4,11 @@
  ************************************************************************************************/
 
 public without sharing class FlowUUID {
-  @AuraEnabled
-  @InvocableVariable
+  @InvocableVariable(required=true label='UUID Is Valid')
   public Boolean isValid;
-  @AuraEnabled
-  @InvocableVariable
+  @InvocableVariable(required=true label='UUID Value')
   public String value;
-  @AuraEnabled
-  @InvocableVariable
+  @InvocableVariable(required=true label='UUID Version')
   public String version;
 
   public FlowUUID() {
